@@ -1,0 +1,106 @@
+<!-- https://www.playframework.com/documentation/latest/SettingsLogger -->
+<configuration>
+
+  <conversionRule conversionWord="coloredLevel" converterClass="play.api.libs.logback.ColoredLevel" />
+
+  <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+    <file>logs/mcube-backup.log</file>
+    <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+        <Pattern>
+            <!--				%d{yyyy-MM-dd HH:mm:ss} - %msg%n-->
+            %boldBlue(%d{yyyy-MM-dd HH:mm:ss zzz,IST}) - %highlight(%-5level) %cyan(%logger:%line) - %msg%n
+        </Pattern>
+    </encoder>
+  </appender>
+
+  <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+     <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss zzz,IST} %highlight(%-5level) %logger:%line - %msg%n
+     </Pattern>
+    </encoder>
+  </appender>-->
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- <encoder>
+          <pattern>%coloredLevel %logger{15} - %message%n%xException{10}</pattern>
+        </encoder> -->
+
+        <encoder>
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss zzz,IST} %highlight(%-5level) %logger.%M:%line - %msg%n
+            </Pattern>
+        </encoder>
+    </appender>
+
+  <appender name="ASYNCFILE" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="FILE" />
+  </appender>
+
+  <appender name="ASYNCSTDOUT" class="ch.qos.logback.classic.AsyncAppender">
+    <appender-ref ref="STDOUT" />
+  </appender>
+  
+  <appender name="FILE-AUDIT"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+	         <level>INFO</level>	         
+        </filter>
+        <file>logs/mcube-backup-logback.log</file>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>
+                <!--				%d{yyyy-MM-dd HH:mm:ss} - %msg%n-->
+                %boldBlue(%d{yyyy-MM-dd HH:mm:ss zzz,IST}) - %highlight(%-5level) %cyan(%logger:%line) - %msg%n
+            </Pattern>
+        </encoder>
+        
+<!--        <withJansi>true</withJansi>-->
+        
+
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+
+            <!-- rollover daily -->
+            <fileNamePattern>logs/archived/backup/mcube-backup-logback.%d{yyyy-MM-dd-HH}.%i.log.zip
+            </fileNamePattern>
+<!--            <maxFileSize>1MB</maxFileSize>-->
+<!--            <timeBasedFileNamingAndTriggeringPolicy
+                class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+                <maxFileSize>1MB</maxFileSize>
+                
+            </timeBasedFileNamingAndTriggeringPolicy>-->
+            
+            <maxFileSize>10MB</maxFileSize>    
+            <maxHistory>60</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+
+        </rollingPolicy>
+
+    </appender>
+    
+    <!--<appender name="DB" class="ch.qos.logback.classic.db.DBAppender">
+        <connectionSource class="ch.qos.logback.core.db.DriverManagerConnectionSource">
+            <driverClass>com.mysql.cj.jdbc.Driver</driverClass>
+            <url>jdbc:mysql://172.20.1.154:3306/logback_logging</url>
+            <user>mcubedev</user>
+            <password>5bx&amp;$DzT</password>
+        </connectionSource>
+    </appender>-->
+
+    <logger name="play" level="INFO" />
+    <logger name="application" level="DEBUG" />
+
+    <!-- Off these ones as they are annoying, and anyway we manage configuration ourselves -->
+    <logger name="com.avaje.ebean.config.PropertyMapLoader" level="OFF" />
+    <logger name="com.avaje.ebeaninternal.server.core.XmlConfigLoader" level="OFF" />
+    <logger name="com.avaje.ebeaninternal.server.lib.BackgroundThread" level="OFF" />
+    <logger name="com.gargoylesoftware.htmlunit.javascript" level="OFF" />
+
+    <root level="INFO">
+<!--        <appender-ref ref="ASYNCFILE" />-->
+        <appender-ref ref="ASYNCSTDOUT" />
+        <appender-ref ref="FILE-AUDIT"/>
+<!--        <appender-ref ref="DB"/>-->
+    </root>
+
+</configuration>
