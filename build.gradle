@@ -23,11 +23,14 @@ dependencies {
 //    compile fileTree(include: ['*.jar'], dir: 'libs')
     implementation fileTree('libs') { include '*.jar' }
     runtimeOnly 'org.zeroturnaround:zt-zip:1.12'
-    implementation 'org.slf4j:slf4j-simple:1.7.30'
+//    implementation 'org.slf4j:slf4j-simple:1.7.30'
     implementation 'org.json:json:20201115'
     implementation 'com.squareup.okhttp3:okhttp:4.9.1'
     implementation 'commons-io:commons-io:2.8.0'
     implementation 'mysql:mysql-connector-java:8.0.20'
+    implementation 'ch.qos.logback:logback-core:1.2.3'
+    implementation 'org.slf4j:slf4j-api:1.7.30'
+    implementation 'ch.qos.logback:logback-classic:1.2.3'
 
 }
 

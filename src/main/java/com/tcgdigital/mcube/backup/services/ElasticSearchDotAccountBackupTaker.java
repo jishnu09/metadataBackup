@@ -61,15 +61,27 @@ public class ElasticSearchDotAccountBackupTaker {
                         }
                         LocalDateTime myDateObj = LocalDateTime.now();
                         String formattedDate = myDateObj.format(myFormatObj);
-                        String fileName=formattedDate+"_"+(dotAccount).replace(".","")+".json";
+                        String dataFileName=formattedDate+"_"+(dotAccount).replace(".","")+"_data.json";
+                        String mappingFileName=formattedDate+"_"+(dotAccount).replace(".","")+"_mapping.json";
                         String zipFileName=formattedDate+"_"+(dotAccount).replace(".","")+".zip";
-                        jsonFile = new FileWriter(elasticsearchBackupPath+File.separator+dotAccount+File.separator+fileName);
+                        jsonFile = new FileWriter(elasticsearchBackupPath+File.separator+dotAccount+File.separator+dataFileName);
                         jsonFile.write(dotAccountData.toString());
                         jsonFile.flush();
                         jsonFile.close();
                         jsonFile=null;
 
-                        zipFile(elasticsearchBackupPath+File.separator+dotAccount+File.separator+fileName,
+
+                        JSONObject mapping=getDotAccountMapping(dotAccount);
+
+                        jsonFile = new FileWriter(elasticsearchBackupPath+File.separator+dotAccount+File.separator+mappingFileName);
+                        jsonFile.write(mapping.toString());
+                        jsonFile.flush();
+                        jsonFile.close();
+                        jsonFile=null;
+                        String[] filesToZip=new String[2];
+                        filesToZip[0]=elasticsearchBackupPath+File.separator+dotAccount+File.separator+dataFileName;
+                        filesToZip[1]=elasticsearchBackupPath+File.separator+dotAccount+File.separator+mappingFileName;
+                        zipFile(filesToZip,
                                 elasticsearchBackupPath+File.separator+dotAccount+File.separator+zipFileName);
 
                         reconcileFiles(elasticsearchBackupPath+File.separator+dotAccount);
@@ -223,11 +235,22 @@ public class ElasticSearchDotAccountBackupTaker {
             log.info(file.getName()+" - "+(new Date(file.lastModified())));
         }
     }
-
-    private void zipFile(String sourceFileName,String zipFileName){
+    private void zipFile(String[] sourceFileNames,String zipFileName){
         try{
             FileOutputStream fos = new FileOutputStream(zipFileName);
             ZipOutputStream zipOut = new ZipOutputStream(fos);
+            Arrays.asList(sourceFileNames).forEach(sourceFileName->{
+                zipFile(sourceFileName,zipOut);
+            });
+            zipOut.close();
+            fos.close();
+        }catch(Exception e){
+            log.error("",e);
+        }
+
+    }
+    private void zipFile(String sourceFileName,ZipOutputStream zipOut){
+        try{
             File fileToZip = new File(sourceFileName);
             FileInputStream fis = new FileInputStream(fileToZip);
             ZipEntry zipEntry = new ZipEntry(fileToZip.getName());
@@ -237,9 +260,7 @@ public class ElasticSearchDotAccountBackupTaker {
             while((length = fis.read(bytes)) >= 0) {
                 zipOut.write(bytes, 0, length);
             }
-            zipOut.close();
             fis.close();
-            fos.close();
             fileToZip.delete();
         }catch(Exception e){
             log.error("",e);
@@ -307,6 +328,30 @@ public class ElasticSearchDotAccountBackupTaker {
             log.error("", e);
         }
         return indicesList;
+    }
+
+    private JSONObject getDotAccountMapping(String dotAccount) {
+        JSONObject mapping=new JSONObject();
+        try {
+
+            OkHttpClient req = elasticConnector.connectElastic();
+
+            Request request = new Request.Builder()
+                    .url(props.getProperty("backup.elasticsearch.url")+ dotAccount+"/_mapping?pretty")
+                    .build();
+
+            Response response = req.newCall(request).execute();
+
+
+            log.info("STATUS:" + response.code());
+            log.info("STATUS TEXT:" + response.message());
+            if (response.isSuccessful()) {
+                mapping = new JSONObject(response.body().string());
+            }
+        } catch (Exception e) {
+            log.error("", e);
+        }
+        return mapping;
     }
 }
 
