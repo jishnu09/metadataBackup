@@ -1,0 +1,12 @@
+code:
+  - src/main/java/**/*
+resources:
+  - src/main/resources/**/*
+test:
+  - src/test/java/**/*
+test_resources:
+  - src/test/resources/**/*
+library:
+  - libs/**/*
+setup:
+  - *.gradle
