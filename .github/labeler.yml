@@ -10,3 +10,5 @@ library:
   - libs/**/*
 setup:
   - *.gradle
+workflows:
+  - .github/workflows/**/*
