@@ -32,6 +32,7 @@ public class BackupTaker {
             }
             else{
                 log.info("Database backup is disabled!!!!!!!!!!!!!!!!!!!!");
+                log.info("To enable database backup set `backup.database.enabled` to `Y`");
             }
             if(props.getProperty("backup.elasticsearch.enabled").equalsIgnoreCase("Y")) {
                 log.info("Elasticsearch backup is enabled.........");
@@ -39,6 +40,7 @@ public class BackupTaker {
                 elasticSearchDotAccountBackupTaker.takeBackup();
             }else{
                 log.info("Elasticsearch backup is disabled!!!!!!!!!!!!!!!!!!!!");
+                log.info("To enable elasticsearch backup set `backup.elasticsearch.enabled` to `Y`");
             }
             Thread.sleep(2000);
             //banner3-D
