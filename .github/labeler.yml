@@ -9,6 +9,6 @@ test_resources:
 library:
   - libs/**/*
 setup:
-  - ./*.gradle
+  - ./*
 workflows:
   - .github/workflows/**/*
