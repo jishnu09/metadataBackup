@@ -2,3 +2,4 @@ backup/
 build/
 logs/
 .idea/
+.gradle/
