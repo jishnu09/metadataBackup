@@ -1,6 +1,10 @@
 [32m-----------------------------------------------------------------------------------------------------------------[0m
 [32m|                                         HELP Section                                                          [32m|[0m
 [32m-----------------------------------------------------------------------------------------------------------------[0m
+[32m|[0m [94m--mode[0m           [95mThis takes the input of mode of backup.                                                      [32m|[0m
+[32m|[0m                  [92mBelow are the values it can accept                                                           [32m|[0m
+[32m|[0m                   [92m- cmd means cli arguments                                                                   [32m|[0m
+[32m|[0m                   [92m- predefined means properties file                                                          [32m|[0m
 [32m|[0m [94m--dBType[0m         [95mThis takes the input of which type of [4mdatabase[24m required to take backup.                      [32m|[0m
 [32m|[0m                  [92mBelow are the values it can accept                                                           [32m|[0m
 [32m|[0m                   [92m- elastic                                                                                   [32m|[0m
