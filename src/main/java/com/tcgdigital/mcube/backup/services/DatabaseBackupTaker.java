@@ -115,24 +115,24 @@ public class DatabaseBackupTaker {
         for (File file : files) {
 //            System.out.printf("%2$td/%2$tm/%2$tY - %s%n", file.getName(),
 //                    file.lastModified());
-            log.info(file.getName()+" - "+(new Date(file.lastModified())));
+            log.info(String.format("%s - %s", file.getName(), new Date(file.lastModified())));
         }
     }
 
 
     private void showDuration(Date startDate,Date endDate,String operation){
         try{
-            long difference_In_Time = endDate.getTime() - startDate.getTime();
-            long difference_In_Millis = (difference_In_Time % 1000);
-            long difference_In_Seconds = (difference_In_Time / 1000)  % 60;
+            long differenceInTime = endDate.getTime() - startDate.getTime();
+            long differenceInMillis = (differenceInTime % 1000);
+            long differenceInSeconds = (differenceInTime / 1000)  % 60;
 
-            long difference_In_Minutes = (difference_In_Time / (1000 * 60)) % 60;
+            long differenceInMinutes = (differenceInTime / (1000 * 60)) % 60;
 
-            long difference_In_Hours = (difference_In_Time / (1000 * 60 * 60)) % 24;
-            log.info("Duration Details for: "+operation);
-            log.info("Start Time: "+startDate);
-            log.info("End Time: "+endDate);
-            log.info("Time Taken: "+difference_In_Hours +" hour(s) " + difference_In_Minutes + " minute(s) " + difference_In_Seconds+" second(s) "+difference_In_Millis+" millisecond(s)");
+            long differenceInHours = (differenceInTime / (1000 * 60 * 60)) % 24;
+            log.info(String.format("Duration Details for: %s", operation));
+            log.info(String.format("Start Time: %s", startDate));
+            log.info(String.format("End Time: %s", endDate));
+            log.info(String.format("Time Taken: %d hour(s) %d minute(s) %d second(s) %d millisecond(s)", differenceInHours, differenceInMinutes, differenceInSeconds, differenceInMillis));
 
         }catch(Exception e){
             log.error("",e);
