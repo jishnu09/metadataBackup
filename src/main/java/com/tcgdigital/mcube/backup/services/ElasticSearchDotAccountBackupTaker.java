@@ -33,7 +33,7 @@ public class ElasticSearchDotAccountBackupTaker {
 
     private static final MediaType MEDIA_TYPE_JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public void takeBackup() {
+    public void takeBackup() throws Exception{
         try{
             log.info("Elasticsearch Backup start..........");
             Date startTime= Calendar.getInstance().getTime();
@@ -50,7 +50,12 @@ public class ElasticSearchDotAccountBackupTaker {
             dotAccountsList.forEach(dotAccount->{
                 Date startTime1= Calendar.getInstance().getTime();
                 log.info("Taking backup of account: "+dotAccount);
-                JSONArray dotAccountData=getDotAccountData(dotAccount);
+                JSONArray dotAccountData= null;
+                try {
+                    dotAccountData = getDotAccountData(dotAccount);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
                 if(!dotAccountData.isEmpty()){
 
                     FileWriter jsonFile = null;
@@ -108,9 +113,10 @@ public class ElasticSearchDotAccountBackupTaker {
             log.info("..........Elasticsearch Backup end");
         }catch(Exception e){
             log.error("",e);
+            throw new RuntimeException(e.getMessage());
         }
     }
-    private JSONArray getDotAccountData(String dotAccount){
+    private JSONArray getDotAccountData(String dotAccount) throws Exception{
         JSONArray dotAccountData=new JSONArray();
         try{
             OkHttpClient req = elasticConnector.connectElastic();
@@ -143,6 +149,7 @@ public class ElasticSearchDotAccountBackupTaker {
             }
         }catch(Exception e){
             log.error("",e);
+            throw new RuntimeException(e.getMessage());
         }
         return dotAccountData;
     }
@@ -295,12 +302,12 @@ public class ElasticSearchDotAccountBackupTaker {
             Request request = new Request.Builder()
                     .url(props.getProperty("backup.elasticsearch.url")+ "_aliases?pretty")
                     .build();
-
+            log.info(String.format("STATUS:%s", request.url()));
             Response response = req.newCall(request).execute();
 
 
-            log.info("STATUS:" + response.code());
-            log.info("STATUS TEXT:" + response.message());
+            log.info(String.format("STATUS:%d", response.code()));
+            log.info(String.format("STATUS TEXT:%s", response.message()));
             if (response.isSuccessful()) {
                 JSONObject jResponse = new JSONObject(response.body().string());
                 log.info(jResponse.toString());

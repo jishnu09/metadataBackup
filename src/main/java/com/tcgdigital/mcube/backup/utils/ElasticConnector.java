@@ -21,6 +21,7 @@ public class ElasticConnector
             String username = props.getProperty("backup.elasticsearch.username");
             String password = props.getProperty("backup.elasticsearch.password");
             if(props.getProperty("backup.elasticsearch.xpack.enable").equalsIgnoreCase("1")) {
+//                log.info("[ES] X-Pack enabled");
                 elasticRequest = new OkHttpClient.Builder().authenticator(new Authenticator() {
                     public Request authenticate(Route route, Response response) throws IOException {
                         String credential = Credentials.basic(username, password);
@@ -28,6 +29,7 @@ public class ElasticConnector
                     }
                 }).build();
             }else{
+//                log.info("[ES] X-Pack disabled");
                 elasticRequest=new OkHttpClient.Builder().build();
             }
         }catch(Exception e) {

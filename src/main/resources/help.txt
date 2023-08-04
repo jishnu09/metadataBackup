@@ -1,0 +1,36 @@
+[32m-----------------------------------------------------------------------------------------------------------------[0m
+[32m|                                         HELP Section                                                          [32m|[0m
+[32m-----------------------------------------------------------------------------------------------------------------[0m
+[32m|[0m [94m--dBType[0m         [95mThis takes the input of which type of [4mdatabase[24m required to take backup.                      [32m|[0m
+[32m|[0m                  [92mBelow are the values it can accept                                                           [32m|[0m
+[32m|[0m                   [92m- elastic                                                                                   [32m|[0m
+[32m|[0m                   [92m- database                                                                                  [32m|[0m
+[32m|[0m                   [92m- both                                                                                      [32m|[0m
+[32m|[0m [94m--esAccounts[0m     [95mThis takes the input of which [4melastic accounts[24m needed to take backup. It accepts values      [32m|[0m
+[32m|[0m                  [95min comma(,) separated or `*` for all.                                                        [32m|[0m
+[32m|[0m                  [92mFor e.g. --esAccounts=a,b,c                                                                  [32m|[0m
+[32m|[0m                           [92m--esAccounts=*                                                                      [32m|[0m
+[32m|[0m [94m--esUrl[0m          [95mThis takes the input of which [4melastic server[24m needed to connect to take backup. It accepts    [32m|[0m
+[32m|[0m                  [95mvalues in URL format with a trailing `/`.                                                    [32m|[0m
+[32m|[0m                 [92m For e.g. --esUrl=http://elasticsearch:9200/                                                  [32m|[0m
+[32m|[0m [94m--xPackEnabled[0m   [95mThis takes the input of whether elastic server is [4mX-Pack[24m enabled or not.                     [32m|[0m
+[32m|[0m                  [92mBelow are the values it can accept                                                           [32m|[0m
+[32m|[0m                   [92m- 0 means disabled                                                                          [32m|[0m
+[32m|[0m                   [92m- 1 means enabled                                                                           [32m|[0m
+[32m|[0m                   [92m- both                                                                                      [32m|[0m
+[32m|[0m [94m--xPackUserName[0m  [93m[[5mOptional[0m] [95mThis takes the input of [4mX-Pack Username[24m.                                          [32m|[0m
+[32m|[0m [94m--xPackPassword[0m  [93m[[5mOptional[0m] [95mThis takes the input of [4mX-Pack Password[24m.                                          [32m|[0m
+[32m|[0m [94m--dbUrl[0m          [95mThis takes the input of which [4mdatabase server[24m needed to connect to take backup. It accepts   [32m|[0m
+[32m|[0m                  [95mvalues in JDBC URL format with [4m`_DATABASE_NAME_`[24m as wildcard.                                [32m|[0m
+[32m|[0m                  [92mFor e.g. --dbUrl=dbc:mysql://127.0.0.1:3306/_DATABASE_NAME_                                  [32m|[0m
+[32m|[0m [94m--dbUserName[0m     [95mThis takes the input of [4mDatabase Username[24m.                                                   [32m|[0m
+[32m|[0m [94m--dbPassword[0m     [93m[[5mOptional[0m] [95mThis takes the input of [4mDatabase Password[24m.                                        [32m|[0m
+[32m|[0m [94m--dbNames[0m        [95mThis takes the input of which [4mdatabase schemas[24m needed to take backup. It accepts values      [32m|[0m
+[32m|[0m                  [95min comma(,) separated or `*` for all.                                                        [32m|[0m
+[32m|[0m                  [92mFor e.g. --dbNames=a,b,c                                                                     [32m|[0m
+[32m|[0m                           [92m--dbNames=*                                                                         [32m|[0m
+[32m|[0m [94m--dbDriver[0m       [95mThis takes the input of which [4mJDBC driver[24m class needed to take backup, currently it          [32m|[0m
+[32m|[0m                  [95msupports [4mMariaDB[24m and [4mMySQL[24m.                                                                  [32m|[0m
+[32m|[0m                  [92mFor e.g. --dbDriver=com.mysql.cj.jdbc.Driver for [4mMySQL[24m                                       [32m|[0m
+[32m|[0m                          [92m --dbDriver=org.mariadb.jdbc.Driver  for [4mMariaDB[24m                                     [32m|[0m
+[32m-----------------------------------------------------------------------------------------------------------------[0m
