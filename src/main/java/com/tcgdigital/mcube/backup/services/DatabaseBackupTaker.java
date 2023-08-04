@@ -18,7 +18,7 @@ public class DatabaseBackupTaker {
 
     private final PropertyReader props=new PropertyReader();
 
-    public void takeBackup() {
+    public void takeBackup() throws Exception {
         try {
             log.info("Database Backup start..........");
             Date startTime= Calendar.getInstance().getTime();
@@ -93,7 +93,7 @@ public class DatabaseBackupTaker {
         }
     }
 
-    private List<String> fetchSchemasFromDatabase() {
+    private List<String> fetchSchemasFromDatabase() throws Exception{
         Connection con=null;
         List<String> schemaList = new LinkedList<>();
         try{
@@ -118,6 +118,7 @@ public class DatabaseBackupTaker {
 
         }catch(Exception e){
             log.error("", e);
+            throw new RuntimeException(e.getMessage());
         }finally{
             if(null!=con){
                 try {
