@@ -27,7 +27,7 @@ dependencies {
     implementation 'org.json:json:20230227'
     implementation 'com.squareup.okhttp3:okhttp:4.11.0'
     implementation 'commons-io:commons-io:2.13.0'
-    implementation 'mysql:mysql-connector-java:8.0.20'
+    implementation 'mysql:mysql-connector-java:8.0.33'
     implementation 'org.mariadb.jdbc:mariadb-java-client:3.1.4'
     implementation 'ch.qos.logback:logback-core:1.4.9'
     implementation 'org.slf4j:slf4j-api:1.7.30'
