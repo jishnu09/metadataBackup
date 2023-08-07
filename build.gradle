@@ -45,17 +45,17 @@ jar {
     }
 
     from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+        configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 
 }
 
-task fatJar(type: Jar) {
-    manifest {
-        attributes 'Main-Class': "com.tcgdigital.mcube.backup.BackupTaker"
-    }
-    archiveBaseName = "${rootProject.name}"
-    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
-    with jar
-}
+//task fatJar(type: Jar) {
+//    manifest {
+//        attributes 'Main-Class': "com.tcgdigital.mcube.backup.BackupTaker"
+//    }
+//    archiveBaseName = "${rootProject.name}"
+//    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+//    with jar
+//}
 
