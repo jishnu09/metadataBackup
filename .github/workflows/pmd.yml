@@ -32,7 +32,7 @@ jobs:
           fetch-depth: '0'
       - name: Run Full PMD Analysis
         id: pmd-full-analysis
-        uses: synergy-au/pmd-analyser-action@v2.1
+        uses: synergy-au/pmd-analyser-action@v2.4
         with:
           analyse-all-code: 'true'
           pmd-version: 'latest'
