@@ -26,7 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           # Incremental diffs require fetch depth to be at 0 to grab the target branch
           fetch-depth: '0'
@@ -38,13 +38,13 @@ jobs:
           analyse-all-code: 'true'
           pmd-version: 'latest'
           file-path: './src'
-          rules-path: './pmd-ruleset.xml'
-          error-rules: 'AvoidDirectAccessTriggerMap,AvoidDmlStatementsInLoops,AvoidHardcodingId'
+          rules-path: './pmd-ruleset.xml'          
           note-rules: 'ApexDoc'
       - name: Upload results to GitHub
-        uses: github/codeql-action/upload-sarif@v1
+        uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: pmd-output.sarif
+          category: pmd-report
       - name: No PMD Errors?
         run: |
           if ${{ steps.pmd-full-analysis.outputs.error-found }} ${{ steps.pmd-partial-analysis.outputs.error-found }}
