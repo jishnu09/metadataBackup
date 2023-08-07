@@ -29,7 +29,7 @@ jobs:
             java-version: '11'
       # Runs a single command using the runners shell
       - name: Veracode Upload And Scan
-        uses: veracode/veracode-uploadandscan-action@0.2.1    
+        uses: veracode/veracode-uploadandscan-action@0.2.6    
         with:
           filepath: 'src'
           vid: '${{ secrets.VERACODE_API_ID }}'
