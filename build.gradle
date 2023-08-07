@@ -22,7 +22,7 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
 //    compile fileTree(include: ['*.jar'], dir: 'libs')
     implementation fileTree('libs') { include '*.jar' }
-    implementation 'org.zeroturnaround:zt-zip:1.12'
+    implementation 'org.zeroturnaround:zt-zip:1.16'
 //    implementation 'org.slf4j:slf4j-simple:1.7.30'
     implementation 'org.json:json:20230227'
     implementation 'com.squareup.okhttp3:okhttp:4.11.0'
