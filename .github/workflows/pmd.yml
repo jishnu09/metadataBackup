@@ -31,7 +31,6 @@ jobs:
           # Incremental diffs require fetch depth to be at 0 to grab the target branch
           fetch-depth: '0'
       - name: Run Full PMD Analysis
-        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         id: pmd-full-analysis
         uses: synergy-au/pmd-analyser-action@v2.1
         with:
