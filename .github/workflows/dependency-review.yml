@@ -25,3 +25,4 @@ jobs:
         with:
           head-ref: ${{ github.ref }}
           base-ref: ${{ github.ref }}
+          comment-summary-in-pr: true
