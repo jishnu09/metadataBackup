@@ -1,0 +1,19 @@
+name: Dependency Submission
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+jobs:
+  build:
+    name: Dependencies
+    runs-on: ubuntu-latest
+    permissions: # The Dependency Submission API requires write permission
+      contents: write
+    steps:
+      - name: 'Checkout Repository'
+        uses: actions/checkout@v3
+
+      - name: Run snapshot action
+        uses: mikepenz/gradle-dependency-submission@{latest}
+        
