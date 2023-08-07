@@ -23,5 +23,5 @@ jobs:
       - name: 'Dependency Review'
         uses: actions/dependency-review-action@v3
         with:
-          head-ref: ${{ github.head_ref }}
-          base-ref: ${{ github.base_ref }}
+          head_ref: ${{ github.head_ref }}
+          base_ref: ${{ github.base_ref }}
