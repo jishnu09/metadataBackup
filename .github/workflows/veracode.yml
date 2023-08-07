@@ -27,6 +27,7 @@ jobs:
       - uses: actions/setup-java@v3 # Make java accessible on path so the uploadandscan action can run.
         with: 
             java-version: '11'
+            distribution: 'oracle'
       # Runs a single command using the runners shell
       - name: Veracode Upload And Scan
         uses: veracode/veracode-uploadandscan-action@0.2.6    

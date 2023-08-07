@@ -8,7 +8,7 @@
     <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
         <Pattern>
             <!--				%d{yyyy-MM-dd HH:mm:ss} - %msg%n-->
-            %boldBlue(%d{yyyy-MM-dd HH:mm:ss zzz,IST}) - %highlight(%-5level) %cyan(%logger:%line) - %msg%n
+            %boldBlue(%d{yyyy-MM-dd HH:mm:ss zzz,+05:30}) - %highlight(%-5level) %cyan(%logger:%line) - %msg%n
         </Pattern>
     </encoder>
   </appender>
@@ -16,7 +16,7 @@
   <!--<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
     <encoder>
      <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss zzz,IST} %highlight(%-5level) %logger:%line - %msg%n
+                %d{yyyy-MM-dd HH:mm:ss zzz,+05:30} %highlight(%-5level) %logger:%line - %msg%n
      </Pattern>
     </encoder>
   </appender>-->
@@ -28,7 +28,7 @@
 
         <encoder>
             <Pattern>
-                %d{yyyy-MM-dd HH:mm:ss zzz,IST} %highlight(%-5level) %logger.%M:%line - %msg%n
+                %d{yyyy-MM-dd HH:mm:ss zzz,+05:30} %highlight(%-5level) %logger.%M:%line - %msg%n
             </Pattern>
         </encoder>
     </appender>
@@ -50,7 +50,7 @@
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
             <Pattern>
                 <!--				%d{yyyy-MM-dd HH:mm:ss} - %msg%n-->
-                %boldBlue(%d{yyyy-MM-dd HH:mm:ss zzz,IST}) - %highlight(%-5level) %cyan(%logger:%line) - %msg%n
+                %boldBlue(%d{yyyy-MM-dd HH:mm:ss zzz,+05:30}) - %highlight(%-5level) %cyan(%logger:%line) - %msg%n
             </Pattern>
         </encoder>
         
