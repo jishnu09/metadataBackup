@@ -24,7 +24,7 @@ dependencies {
     implementation fileTree('libs') { include '*.jar' }
     implementation 'org.zeroturnaround:zt-zip:1.16'
 //    implementation 'org.slf4j:slf4j-simple:1.7.30'
-    implementation 'org.json:json:20230227'
+    implementation 'org.json:json:20231013'
     implementation 'com.squareup.okhttp3:okhttp:4.11.0'
     implementation 'commons-io:commons-io:2.13.0'
     implementation 'mysql:mysql-connector-java:8.0.33'
